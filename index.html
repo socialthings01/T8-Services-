@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Orders</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:
+        radial-gradient(circle at 15% 10%,#172554 0%,transparent 35%),
+        radial-gradient(circle at 85% 15%,#312e81 0%,transparent 32%),
+        radial-gradient(circle at 50% 100%,#0f766e 0%,transparent 28%),
+        #050711;
+    color:#fff;
+    min-height:100vh;
+}
+
+.warning{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:linear-gradient(90deg,#4f46e5,#2563eb,#06b6d4);
+    color:#fff;
+    text-align:center;
+    padding:10px;
+    font-weight:bold;
+    z-index:999;
+    box-shadow:0 4px 20px rgba(37,99,235,.25);
+}
+
+.container{
+    width:92%;
+    max-width:500px;
+    margin:75px auto 30px;
+}
+
+h1{
+    text-align:center;
+    color:#e0f2fe;
+    margin-bottom:25px;
+    text-shadow:0 0 20px rgba(56,189,248,.35);
+}
+
+.card{
+    background:rgba(10,15,30,.78);
+    border:1px solid rgba(100,116,139,.28);
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:18px;
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    backdrop-filter:blur(14px);
+}
+
+.card h2{
+    color:#93c5fd;
+    margin-bottom:15px;
+}
+
+/* SERVICES */
+
+.services-box{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,23,42,.94),
+            rgba(8,12,28,.94)
+        );
+    border:1px solid rgba(96,165,250,.22);
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.4),
+        0 0 35px rgba(37,99,235,.08);
+}
+
+.services-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.services-title h2{
+    margin:0;
+    font-size:21px;
+    color:#dbeafe;
+}
+
+.available{
+    font-size:10px;
+    color:#67e8f9;
+    border:1px solid rgba(103,232,249,.4);
+    background:rgba(6,182,212,.08);
+    border-radius:20px;
+    padding:6px 9px;
+}
+
+.service{
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,41,59,.9),
+            rgba(15,23,42,.72)
+        );
+    border:1px solid rgba(96,165,250,.18);
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:13px;
+    cursor:pointer;
+    transition:.25s ease;
+}
+
+.service:last-child{
+    margin-bottom:0;
+}
+
+.service::before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    right:-60px;
+    top:-70px;
+    background:#38bdf8;
+    opacity:.08;
+    filter:blur(25px);
+    border-radius:50%;
+}
+
+.service:hover{
+    transform:translateY(-3px);
+    border-color:rgba(56,189,248,.55);
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.35),
+        0 0 25px rgba(56,189,248,.09);
+}
+
+.service-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:13px;
+}
+
+.service-name{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.service-icon{
+    width:43px;
+    height:43px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(59,130,246,.18),
+            rgba(139,92,246,.14)
+        );
+    border:1px solid rgba(96,165,250,.2);
+    font-size:21px;
+    box-shadow:0 5px 18px rgba(37,99,235,.12);
+}
+
+.service-name strong{
+    font-size:18px;
+    color:#f1f5f9;
+}
+
+.service-name small{
+    display:block;
+    color:#94a3b8;
+    margin-top:3px;
+    font-size:12px;
+}
+
+.off-badge{
+    background:
+        linear-gradient(135deg,#7c3aed,#2563eb);
+    color:#fff;
+    font-size:10px;
+    font-weight:bold;
+    padding:6px 9px;
+    border-radius:20px;
+    box-shadow:0 4px 15px rgba(79,70,229,.25);
+}
+
+.price-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    background:rgba(2,6,23,.65);
+    border:1px solid rgba(100,116,139,.2);
+    border-radius:11px;
+    padding:11px 12px;
+}
+
+.old{
+    text-decoration:line-through;
+    color:#64748b;
+    font-size:11px;
+}
+
+.new-price{
+    color:#67e8f9;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.service-arrow{
+    color:#60a5fa;
+    font-size:20px;
+}
+
+/* INPUTS */
+
+input{
+    width:100%;
+    padding:13px;
+    margin:8px 0 14px;
+    border-radius:10px;
+    border:1px solid rgba(100,116,139,.35);
+    background:rgba(2,6,23,.7);
+    color:#fff;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#38bdf8;
+    box-shadow:0 0 15px rgba(56,189,248,.1);
+}
+
+label{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+    color:#cbd5e1;
+}
+
+.amount{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14,116,144,.12),
+            rgba(30,64,175,.12)
+        );
+    border:1px solid rgba(56,189,248,.2);
+    padding:14px;
+    border-radius:10px;
+    margin:8px 0 15px;
+    font-size:18px;
+    font-weight:bold;
+    color:#67e8f9;
+}
+
+/* BUTTONS */
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #2563eb
+        );
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:8px;
+    box-shadow:0 7px 20px rgba(37,99,235,.2);
+    transition:.2s;
+}
+
+button:hover{
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #0891b2
+        );
+    transform:translateY(-1px);
+}
+
+.back{
+    background:#1e293b;
+    box-shadow:none;
+}
+
+.back:hover{
+    background:#334155;
+}
+
+/* PAYMENT */
+
+.payment-notice{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,41,59,.9),
+            rgba(15,23,42,.8)
+        );
+    border:1px solid rgba(56,189,248,.25);
+    border-radius:15px;
+    padding:16px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.pay-title{
+    color:#93c5fd;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.pay-warning{
+    color:#cbd5e1;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.pay-amount{
+    color:#67e8f9;
+    font-size:30px;
+    font-weight:bold;
+    margin:12px 0;
+    text-shadow:0 0 18px rgba(103,232,249,.25);
+}
+
+.pay-text{
+    color:#94a3b8;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.qr{
+    width:100%;
+    max-width:300px;
+    display:block;
+    margin:15px auto;
+    border-radius:12px;
+    background:#fff;
+    padding:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.payment-note{
+    background:rgba(15,118,110,.12);
+    border:1px solid rgba(45,212,191,.2);
+    color:#99f6e4;
+    border-radius:10px;
+    padding:11px;
+    font-size:12px;
+    line-height:1.5;
+    text-align:center;
+    margin:12px 0;
+}
+
+/* FINAL 24 HOUR NOTICE */
+
+.order-confirmation{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(6,182,212,.13),
+            rgba(37,99,235,.14),
+            rgba(124,58,237,.12)
+        );
+    border:1px solid rgba(56,189,248,.45);
+    border-radius:15px;
+    padding:16px;
+    text-align:center;
+    margin-bottom:15px;
+    box-shadow:
+        0 0 25px rgba(56,189,248,.08),
+        inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.confirmation-title{
+    color:#67e8f9;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:9px;
+}
+
+.confirmation-text{
+    color:#dbeafe;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.confirmation-time{
+    color:#fff;
+    font-weight:bold;
+}
+
+.instructions{
+    color:#cbd5e1;
+    line-height:1.6;
+    font-size:14px;
+    margin:12px 0;
+}
+
+.order-message{
+    background:rgba(2,6,23,.8);
+    border:1px solid rgba(100,116,139,.3);
+    border-radius:11px;
+    padding:15px;
+    white-space:pre-line;
+    line-height:1.6;
+    margin:12px 0;
+    font-size:14px;
+    color:#e2e8f0;
+}
+
+.copy-success{
+    text-align:center;
+    color:#67e8f9;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.hidden{
+    display:none;
+}
+
+.contact{
+    text-align:center;
+    margin-top:25px;
+    color:#64748b;
+    font-size:14px;
+}
+
+.contact a{
+    color:#60a5fa;
+    text-decoration:none;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="warning">
+⚠️ DON'T REFRESH — DATA MAY BE LOST
+</div>
+
+<div class="container">
+
+<h1>Social Orders</h1>
+
+<!-- SERVICES -->
+
+<div id="servicesSection" class="card services-box">
+
+    <div class="services-title">
+        <h2>Social Services</h2>
+        <span class="available">● AVAILABLE</span>
+    </div>
+
+    <div class="service" onclick="openOrder('Views')">
+
+        <div class="service-top">
+
+            <div class="service-name">
+
+                <div class="service-icon">
+                    👁️
+                </div>
+
+                <div>
+                    <strong>Views</strong>
+                    <small>Boost your post views</small>
+                </div>
+
+            </div>
+
+            <span class="off-badge">
+                50% OFF
+            </span>
+
+        </div>
+
+        <div class="price-row">
+
+            <span class="old">
+                ₹1 = 1K Views
+            </span>
+
+            <span class="new-price">
+                ₹1 = 2K Views
+            </span>
+
+            <span class="service-arrow">
+                ›
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="service" onclick="openOrder('Likes')">
+
+        <div class="service-top">
+
+            <div class="service-name">
+
+                <div class="service-icon">
+                    ❤️
+                </div>
+
+                <div>
+                    <strong>Likes</strong>
+                    <small>Boost your post likes</small>
+                </div>
+
+            </div>
+
+            <span class="off-badge">
+                50% OFF
+            </span>
+
+        </div>
+
+        <div class="price-row">
+
+            <span class="old">
+                ₹20 = 1K Likes
+            </span>
+
+            <span class="new-price">
+                ₹10 = 1K Likes
+            </span>
+
+            <span class="service-arrow">
+                ›
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ORDER -->
+
+<div id="orderSection" class="card hidden">
+
+    <h2>Order Details</h2>
+
+    <label>Service</label>
+
+    <input
+        type="text"
+        id="service"
+        readonly
+    >
+
+    <label>Social Media Link</label>
+
+    <input
+        type="url"
+        id="socialLink"
+        placeholder="Paste your post/reel link"
+    >
+
+    <label>Quantity</label>
+
+    <input
+        type="number"
+        id="quantity"
+        placeholder="Example: 1000"
+        min="1"
+        oninput="calculateAmount()"
+    >
+
+    <div class="amount">
+        Amount: ₹<span id="amount">0.00</span>
+    </div>
+
+    <button onclick="continuePayment()">
+        Continue to Payment
+    </button>
+
+    <button class="back" onclick="goBack()">
+        Back
+    </button>
+
+</div>
+
+<!-- PAYMENT -->
+
+<div id="paymentSection" class="card hidden">
+
+    <h2>Payment</h2>
+
+    <div class="payment-notice">
+
+        <div class="pay-title">
+            💳 PAYMENT INSTRUCTION
+        </div>
+
+        <div class="pay-warning">
+            ⚠️ Please pay the <b>exact amount shown below.</b>
+        </div>
+
+        <div class="pay-amount">
+            ₹<span id="paymentAmount">0.00</span>
+        </div>
+
+        <div class="pay-text">
+            Scan the QR code and pay exactly the amount
+            shown above. Do not pay less or more.
+        </div>
+
+    </div>
+
+    <img
+        src="qr.png"
+        class="qr"
+        alt="Payment QR"
+    >
+
+    <div class="payment-note">
+        ✅ Before completing payment, check the amount
+        in your UPI app and make sure it matches the
+        amount shown above.
+    </div>
+
+    <label>
+        UTR / Transaction ID
+    </label>
+
+    <input
+        type="text"
+        id="utr"
+        placeholder="Enter UTR / Transaction ID"
+    >
+
+    <button onclick="nextStep()">
+        Next Step
+    </button>
+
+    <button class="back" onclick="backToOrder()">
+        Back
+    </button>
+
+</div>
+
+<!-- FINAL -->
+
+<div id="finalSection" class="card hidden">
+
+    <h2>Final Step</h2>
+
+    <!-- 24 HOUR ORDER CONFIRMATION -->
+
+    <div class="order-confirmation">
+
+        <div class="confirmation-title">
+            ⚡ ORDER CONFIRMATION
+        </div>
+
+        <div class="confirmation-text">
+            Your order will be completed within
+            <span class="confirmation-time">24 hours</span>
+            after the exact order message is sent to
+            our Instagram ID.
+            <br><br>
+            Please make sure you send the exact message
+            without editing it.
+        </div>
+
+    </div>
+
+    <div
+        id="orderMessage"
+        class="order-message"
+    ></div>
+
+    <button
+        type="button"
+        onclick="copyOrderMessage()"
+    >
+        📋 Copy Order Message
+    </button>
+
+    <div
+        id="copySuccess"
+        class="copy-success"
+    ></div>
+
+    <div class="instructions">
+
+        ⚠️ IMPORTANT: Follow these steps exactly.<br>
+
+        1. Copy the Order Message shown above.<br>
+
+        2. Send the same message to our Instagram ID.<br>
+
+        3. Custom/edited message is not allowed.<br>
+
+        4. Sending the exact message is mandatory.
+
+    </div>
+
+    <button
+        type="button"
+        onclick="openInstagram()"
+    >
+        📸 Open Instagram
+    </button>
+
+</div>
+
+<div class="contact">
+
+    For issues:
+
+    <a
+        href="https://www.instagram.com/reyac6984/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        @reyac6984
+    </a>
+
+</div>
+
+</div>
+
+<script>
+
+const API_URL =
+"https://social-orders-api.shreyasigamerz77.workers.dev";
+
+const INSTAGRAM_ID =
+"reyac6984";
+
+let selectedService = "";
+let currentAmount = 0;
+let generatedOrderId = "";
+
+
+/* INSTAGRAM */
+
+function openInstagram(){
+
+    window.location.href =
+        "https://www.instagram.com/reyac6984/";
+
+}
+
+
+/* OPEN ORDER */
+
+function openOrder(service){
+
+    selectedService = service;
+
+    document.getElementById("service").value =
+        service;
+
+    document.getElementById("servicesSection")
+        .classList.add("hidden");
+
+    document.getElementById("orderSection")
+        .classList.remove("hidden");
+
+    document.getElementById("quantity").value = "";
+
+    document.getElementById("amount").innerText =
+        "0.00";
+}
+
+
+/* AUTOMATIC AMOUNT */
+
+function calculateAmount(){
+
+    const quantity =
+        Number(
+            document.getElementById("quantity").value
+        );
+
+    if(!quantity || quantity <= 0){
+
+        currentAmount = 0;
+
+        document.getElementById("amount")
+            .innerText = "0.00";
+
+        return;
+    }
+
+    if(selectedService === "Views"){
+
+        currentAmount =
+            quantity / 2000;
+
+    }
+
+    else if(selectedService === "Likes"){
+
+        currentAmount =
+            (quantity / 1000) * 10;
+
+    }
+
+    document.getElementById("amount")
+        .innerText =
+        currentAmount.toFixed(2);
+}
+
+
+/* CONTINUE TO PAYMENT */
+
+function continuePayment(){
+
+    const link =
+        document.getElementById("socialLink")
+        .value.trim();
+
+    const quantity =
+        Number(
+            document.getElementById("quantity").value
+        );
+
+    if(!link){
+
+        alert(
+            "Please enter your social media link."
+        );
+
+        return;
+    }
+
+    if(!quantity || quantity <= 0){
+
+        alert(
+            "Please enter a valid quantity."
+        );
+
+        return;
+    }
+
+    calculateAmount();
+
+    document.getElementById("paymentAmount")
+        .innerText =
+        currentAmount.toFixed(2);
+
+    document.getElementById("orderSection")
+        .classList.add("hidden");
+
+    document.getElementById("paymentSection")
+        .classList.remove("hidden");
+}
+
+
+/* BACK */
+
+function goBack(){
+
+    document.getElementById("orderSection")
+        .classList.add("hidden");
+
+    document.getElementById("servicesSection")
+        .classList.remove("hidden");
+}
+
+
+function backToOrder(){
+
+    document.getElementById("paymentSection")
+        .classList.add("hidden");
+
+    document.getElementById("orderSection")
+        .classList.remove("hidden");
+}
+
+
+/* NEXT STEP */
+
+async function nextStep(){
+
+    const utr =
+        document.getElementById("utr")
+        .value.trim();
+
+    const link =
+        document.getElementById("socialLink")
+        .value.trim();
+
+    const quantity =
+        Number(
+            document.getElementById("quantity").value
+        );
+
+    if(!utr){
+
+        alert(
+            "Please enter UTR / Transaction ID."
+        );
+
+        return;
+    }
+
+    generatedOrderId =
+        "ORD-" +
+        Date.now().toString().slice(-8);
+
+
+    const orderData = {
+
+        type:"payment",
+
+        service:selectedService,
+
+        link:link,
+
+        quantity:quantity,
+
+        amount:currentAmount,
+
+        utr:utr,
+
+        orderId:generatedOrderId
+    };
+
+
+    try{
+
+        await fetch(
+            API_URL,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                    JSON.stringify(orderData)
+            }
+        );
+
+    }
+
+    catch(error){
+
+        console.log(
+            "API Error:",
+            error
+        );
+    }
+
+
+    const message =
+`Order ID: ${generatedOrderId}
+Order Plan: ${selectedService}
+Price: ₹${currentAmount.toFixed(2)}
+Quantity: ${quantity}
+Social Link: ${link}
+UTR / Transaction ID: ${utr}`;
+
+
+    document.getElementById("orderMessage")
+        .innerText = message;
+
+    document.getElementById("paymentSection")
+        .classList.add("hidden");
+
+    document.getElementById("finalSection")
+        .classList.remove("hidden");
+}
+
+
+/* COPY ORDER MESSAGE */
+
+async function copyOrderMessage(){
+
+    const message =
+        document.getElementById("orderMessage")
+        .innerText;
+
+    const success =
+        document.getElementById("copySuccess");
+
+
+    try{
+
+        if(
+            navigator.clipboard &&
+            window.isSecureContext
+        ){
+
+            await navigator.clipboard
+                .writeText(message);
+
+        }
+
+        else{
+
+            const textarea =
+                document.createElement("textarea");
+
+            textarea.value = message;
+
+            textarea.style.position =
+                "fixed";
+
+            textarea.style.left =
+                "-9999px";
+
+            document.body.appendChild(
+                textarea
+            );
+
+            textarea.focus();
+
+            textarea.select();
+
+            document.execCommand("copy");
+
+            textarea.remove();
+        }
+
+
+        success.innerText =
+            "✅ Order message copied!";
+
+    }
+
+    catch(error){
+
+        success.innerText =
+            "❌ Copy blocked. Long-press the message and copy it.";
+    }
+}
+
+</script>
+
+</body>
+</html>
